@@ -2,10 +2,10 @@
 
 A simple Snake game for CircuitMess Ringo.
 
-![screenshot1](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot01.bmp)
-![screenshot2](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot02.bmp)
-![screenshot1](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot03.bmp)
-![screenshot2](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot04.bmp)
+![screenshot1](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot_01.bmp)
+![screenshot2](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot_02.bmp)
+![screenshot1](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot_03.bmp)
+![screenshot2](https://raw.githubusercontent.com/CircuitMess/Snake/master/Screenshots/screenshot_04.bmp)
 
 
 ## Meta
