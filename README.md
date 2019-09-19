@@ -2,7 +2,6 @@
 
 A simple Snake game for CircuitMess Ringo.
 
-<br/>
 
 ## Meta
 
