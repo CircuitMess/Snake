@@ -260,9 +260,25 @@ void crash(){
   }
 }
 void highScores(){
-  File file = SD.open(highscoresPath);
-  JsonArray &hiscores = mp.jb.parseArray(file);
-  file.close();
+  mp.jb.clear();
+	File file = SD.open(highscoresPath);
+	JsonArray &hiscores = mp.jb.parseArray(file);
+	file.close();
+  char nameArray[6][4];
+  uint16_t scoreArray[6];
+  memset(scoreArray, 0, 6);
+  uint16_t hiscoresSize = hiscores.size();
+  for(uint8_t i = 0; i < 6; i++)
+  {
+    for(JsonObject& element:hiscores)
+    {
+      if(element["Rank"] == i)
+      {
+        strncpy(nameArray[i], element["Name"], 4);
+        scoreArray[i] = element["Score"];
+      }
+    }
+  }
   while(1)
   {
     mp.display.fillScreen(TFT_BLACK);
@@ -276,13 +292,9 @@ void highScores(){
     for (int i = 1; i < 6;i++)
     {
       mp.display.setCursor(18, i * 19);
-      if(i <= hiscores.size())
+      if(i <= hiscoresSize)
       {
-        for(JsonObject& element:hiscores)
-        {
-          if(element["Rank"] == i)
-            mp.display.printf("%d. %.3s %3d", i, element["Name"].as<char*>(), element["Score"].as<uint16_t>());
-        }
+        mp.display.printf("%d. %.3s %3d", i, nameArray[i], scoreArray[i]);
       }
       else
         mp.display.printf("%d. --- ---", i);
