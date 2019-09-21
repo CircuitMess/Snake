@@ -526,22 +526,16 @@ void enterScore(){
       mp.jb.clear();
       File file;
       file = SD.open(highscoresPath);
-      JsonArray &hiscores = mp.jb.parseArray(file);
-      /* if(!hiscores.success()){
-        file = SD.open(highscoresPath);
-       JsonArray &hiscores = mp.jb.parseArray(file);
-      } */
+      JsonArray &hiscores1 = mp.jb.parseArray(file);
       file.close();
-      for (JsonObject& element : hiscores)
+      for (JsonObject& element : hiscores1)
       {
         if(element["Rank"] == 1)
           tempScore = element["Score"].as<int>();
         if(element["Rank"] == 5)
           tempScore2 = element["Score"].as<int>();
       }
-      Serial.println("HERE");
-      delay(5);
-      
+      hiscores1.end();
 
       if(hScore != 0 && hScore >= tempScore2) enterInitials();
       else {
@@ -551,6 +545,9 @@ void enterScore(){
         exitFlag = 0;
         return;
       }
+      file = SD.open(highscoresPath);
+      JsonArray &hiscores = mp.jb.parseArray(file);
+      file.close();
       JsonObject &newHiscore = mp.jb.createObject();
       newHiscore["Name"] = name;
       newHiscore["Score"] = hScore;
