@@ -208,7 +208,7 @@ void reset(){
   //  mp.display.drawRect(2,1,156,126,TFT_WHITE);
     while(!mp.update());
     drawFood();
-    delay(1000);
+    // delay(1000);
 }
 void endScreen(){
         FastLED.showColor(CRGB::DarkRed);  
@@ -294,10 +294,8 @@ void highScores(){
     mp.display.print("B: Back");
     mp.update();
   }
-//  mp.homePopupEnable(1);
 }
 void buttonDir(){
-//  mp.buttons.update();
       if ((mp.buttons.pressed(BTN_4) || mp.buttons.pressed(BTN_LEFT)) && !hFlag){
       dirX = -1*speed;
       dirY = 0;
@@ -372,9 +370,10 @@ void mm(){
 
   defaultInt();
   osc->setWaveform(SINE);
-  while(!mp.buttons.pressed(BTN_A)){
+  while(!mp.buttons.pressed(BTN_A))
+	{
     mp.display.fillScreen(TFT_BLACK);
-  snakeMenu();
+ 	  snakeMenu();
     control();
     drawSnake();
     mp.display.setCursor(50, 9, 1);
@@ -403,48 +402,49 @@ void mm(){
     FastLED.showColor(CRGB::LimeGreen);
         speed = 1;
     }
-  if(mp.buttons.pressed(BTN_RIGHT) && menuSignal == 0 && borderFlag == 1){
-    osc->note(50,0.05);
-    FastLED.showColor(CRGB::DarkGreen);
-      borderFlag = 0;
-    }
-    if(mp.buttons.pressed(BTN_LEFT) && menuSignal == 0 && borderFlag == 0){
-    osc->note(50,0.05);
-    FastLED.showColor(CRGB::LimeGreen);
-        borderFlag = 1;
-    }
-    mp.display.setTextSize(2);
-    //mp.display.fillScreen(TFT_BLACK);
-    mp.display.setTextColor(TFT_DARKGREY);
-    if(borderFlag == 1 && menuSignal == 0)  mp.display.setTextColor(TFT_YELLOW);
-    mp.display.setCursor(9, 22, 2);
-    mp.display.print(F("WALL"));
-    mp.display.setTextColor(TFT_DARKGREY);
-  mp.display.print(F("/"));
-    if(menuSignal == 0 && borderFlag == 0)mp.display.setTextColor(TFT_YELLOW);
-    mp.display.setCursor(88, 22, 2);
-    mp.display.print(F("FREE"));
-    mp.display.setTextColor(TFT_DARKGREY);
-    if(menuSignal == 1)mp.display.setTextColor(TFT_YELLOW);
-    mp.display.setCursor(25, 46, 2);
-  mp.display.print("SPEED: ");
-    mp.display.print(speed);
-    mp.display.setTextColor(TFT_DARKGREY);
-    if(menuSignal == 2)mp.display.setTextColor(TFT_YELLOW);
-    mp.display.setCursor(29, 70, 2);
-    mp.display.print(F("SCORES"));
-  mp.display.setTextColor(TFT_DARKGREY);
-  if(menuSignal == 3)mp.display.setTextColor(TFT_YELLOW);
-    mp.display.setCursor(54, 94, 2);
-    mp.display.print(F("EXIT"));
-  delayMicroseconds(100);
+		if(mp.buttons.pressed(BTN_RIGHT) && menuSignal == 0 && borderFlag == 1){
+			osc->note(50,0.05);
+			FastLED.showColor(CRGB::DarkGreen);
+			borderFlag = 0;
+		}
+		if(mp.buttons.pressed(BTN_LEFT) && menuSignal == 0 && borderFlag == 0){
+			osc->note(50,0.05);
+			FastLED.showColor(CRGB::LimeGreen);
+				borderFlag = 1;
+		}
+		mp.display.setTextSize(2);
+		//mp.display.fillScreen(TFT_BLACK);
+		mp.display.setTextColor(TFT_DARKGREY);
+		if(borderFlag == 1 && menuSignal == 0)
+			mp.display.setTextColor(TFT_YELLOW);
+		mp.display.setCursor(9, 22, 2);
+		mp.display.print(F("WALL"));
+		mp.display.setTextColor(TFT_DARKGREY);
+		mp.display.print(F("/"));
+		if(menuSignal == 0 && borderFlag == 0)mp.display.setTextColor(TFT_YELLOW);
+		mp.display.setCursor(88, 22, 2);
+		mp.display.print(F("FREE"));
+		mp.display.setTextColor(TFT_DARKGREY);
+		if(menuSignal == 1)mp.display.setTextColor(TFT_YELLOW);
+		mp.display.setCursor(25, 46, 2);
+		mp.display.print("SPEED: ");
+		mp.display.print(speed);
+		mp.display.setTextColor(TFT_DARKGREY);
+		if(menuSignal == 2)mp.display.setTextColor(TFT_YELLOW);
+		mp.display.setCursor(29, 70, 2);
+		mp.display.print(F("SCORES"));
+		mp.display.setTextColor(TFT_DARKGREY);
+		if(menuSignal == 3)mp.display.setTextColor(TFT_YELLOW);
+			mp.display.setCursor(54, 94, 2);
+			mp.display.print(F("EXIT"));
+		delayMicroseconds(100);
     mp.update();
   }
   snakeMenuInt = 0;
   if(menuSignal == 2)highScores();
   if(menuSignal == 3) mp.loader();
   //else;
-  delay(1000);
+  // delay(1000);
 }
 void enterInitials() {
   name = "";
@@ -610,13 +610,13 @@ void paused(){
     mp.display.print(F("Press A to play")); 
     mp.display.setCursor(35,80,2);
     mp.display.print(F("Press B to exit")); 
-    while(!mp.update());
+    mp.update();
     if(mp.buttons.released(BTN_A)){
-      delay(500);
+      mp.buttons.update();
       break;
     }
     if(mp.buttons.released(BTN_B)){
-      delay(800);
+      mp.buttons.update();
       reset();
       break;
     }
@@ -681,6 +681,10 @@ void loop() {
   mp.display.fillRect(foodX, foodY, foodSize, foodSize, TFT_YELLOW);
   foodCheck();
   //----------------------------------
-  if(mp.buttons.released(BTN_B)) paused();
+  if(mp.buttons.released(BTN_B))
+  {
+		mp.buttons.update();
+		paused();
+	}
 
 }
