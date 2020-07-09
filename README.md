@@ -26,6 +26,6 @@ A simple Snake game for CircuitMess Ringo.
 
 Copyright © 2019 CircuitMess
 
-Licensed under [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html)
+Licensed under [MIT License](https://choosealicense.com/licenses/mit/)
 
 
